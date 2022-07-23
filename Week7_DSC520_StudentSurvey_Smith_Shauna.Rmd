@@ -1,0 +1,101 @@
+---
+title: "DSC520_Week7_Smith_Shauna_StudentSurvey"
+author: "Shauna Smith"
+date: "July 21, 2022"
+output:
+  html_document: default
+  word_document: default
+---
+---
+title: "DSC520_Week7_Smith_Shauna_StudentSurvey"
+author: "Shauna Smith"
+date: '2022-07-21'
+output:
+  word_document: default
+  html_document: default
+  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+
+studentSurv <- read.csv(file.choose())
+
+studentSurv
+```
+
+##Use R to calculate the covariance of the Survey variables and provide an explanation of why you would use this calculation and what the results indicate.
+
+```{r}
+cov(studentSurv)
+pairs(studentSurv)
+```
+
+##Examine the Survey data variables. What measurement is being used for the variables? Explain what effect changing the measurement being used for the variables would have on the covariance calculation. Would this be a problem? Explain and provide a better alternative if needed.
+
+The measurement being used with the variables found in Studentsurvey are that of (int)-"integer" & (Dbl)-"Double class", or a double floating number with double decimals. since in R will automatically convert these 2 classes, the effect on covariance is limited with this dataset.A potential remedy, if desired, is to convert the isolated difference in unit measurements by "standardization" and recalculate the covariance to asses a better determination of their relationship. the results should nest somewhere between 1 and -1, with 0 indicating no coefficient linear relation .
+
+##Choose the type of correlation test to perform, explain why you chose this test, and make a prediction if the test yields a positive or negative correlation?
+
+The type of correlation test I would choose is bivariate, and is based off of the number of variables exceeding 2. Therefore, I would choose a correlation matrix. Additionlly, I would use the default Pearson method, as my data is not catagorical, nor rank based data per se.
+
+##Perform a correlation analysis of: #All variables
+
+```{r}
+cor(studentSurv)
+```
+
+#A single correlation between two a pair of the variables
+
+```{r}
+cor(studentSurv$TimeReading, studentSurv$Happiness)
+```
+
+#Repeat your correlation test in step 2 but set the confidence interval at 99%
+
+```{r}
+cor.test(studentSurv$TimeReading, studentSurv$Happiness, use = "complete.obs", method = "pearson", conf.level = .99)
+```
+
+#Describe what the calculations in the correlation matrix suggest about the #relationship between the variables. Be specific with your explanation.
+
+The greatest and most astonishing correlation observed was between the variables "TimeTV" and "Happiness" at roughly .64, this showed a strong positive correlation. However, just as disheartening, but noticeable was the negative moderate correlation seen between "Happiness" and "TimeReading" at roughly -0.43 on the correlation matrix. When looking at the outcomes for "Gender" there was no significant correlations. Finally, the comparables set against themselves, were reaffirmed as the standard proof, regarding the attributes of these variables showing a "perfect" correlation at 1.0.
+
+##Calculate the correlation coefficient and the coefficient of determination, describe what you conclude about the results
+
+```{r}
+cor(studentSurv)^2
+cor(studentSurv)^2*100
+```
+
+##Based on your analysis can you say that watching more TV caused students to read less? Explain I would say that the data shows the relevance of "TimeTv" accounted for 77.98% and "TimeReading" only accounted for 18.91%. This is suggesting the largest portion of devotion regarding time, was dedicated to "Timetv" leaving less than 19% attributable to "TimeReading". This evidence, along with a strong correlation from the matrix can lead us to claim a significant correlation, but not necessarily a determined causation outside of the fixed time measurement allotted overall/(awake for only an avg. of 16 hours/day).
+
+##Pick three variables and perform a partial correlation, documenting which variable you are "controlling". Explain how this changes your interpretation and explanation of the results
+
+```{r}
+install.packages("ggm")
+library(ggm)
+PVar <- pcor(c("Happiness","Gender","TimeReading"),var(studentSurv))
+PVar
+PVar^2
+
+pvar2 <- pcor(c("Happiness","TimeReading"), var(studentSurv))
+pvar2
+pvar2^2
+
+pcor.test(PVar, 1, 12)
+
+
+
+```
+
+This partial correlation, with "Gender" as a discrete dichotomy, was the 1 control that I hypothetically selected for. The results from the pcor.test, showed the p-value at 0.6997. This implies an effect greater than .05 but still less than 1 and therefore imparting a small significance. Between "happiness" and "TimeReading" there was a similar jump in partial correlation as an isolated pcor for three variables vs the two(absent "gender"), and when withholding for "Gender" as a variable, the change is confirmed again in the output. Therefore, it is a noticeable and expected discovery when a similar value difference is shared among all 3 variables vs "Gender" as a control, when checking for correlations and the effect of "gender". Ultimately, the results are leading to an inference that gleans a smaller significance with the given p-value, and a difference from the "Gender" variable as a control with 18.91% v.s. for correlation over all 3 variables with a potential for hiding a possible type 2 effect when showing at only 1.73%.
