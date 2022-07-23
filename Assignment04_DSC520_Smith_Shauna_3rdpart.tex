@@ -1,0 +1,257 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={ASSIGNMENT 4},
+  pdfauthor={Shauna Smith},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{ASSIGNMENT 4}
+\author{Shauna Smith}
+\date{2022-07-16}
+
+\begin{document}
+\maketitle
+
+\hypertarget{markdown-basics}{%
+\section{Markdown Basics}\label{markdown-basics}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://rmarkdown.rstudio.com/lesson-1.html}{Introduction to R
+  Markdown}
+\item
+  \href{https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf}{The
+  R Markdown Cheatsheet}
+\item
+  \href{https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf}{The
+  R Markdown Reference Guide}
+\end{itemize}
+
+\hypertarget{favorite-foods}{%
+\subsection{Favorite Foods}\label{favorite-foods}}
+
+1.Nectarines 2.pho soup 3.mashed potatoes and gravy
+
+\hypertarget{images}{%
+\subsection{Images}\label{images}}
+
+\begin{figure}
+\centering
+\includegraphics{https://raw.githubusercontent.com/shauna2021/dsc520/86f7aa53c7d94f656e5afa13de25a287aeb2ea3f/completed/assignment04/plots/10-all-cases-log.png}
+\caption{requested image}
+\end{figure}
+
+\hypertarget{add-a-quote}{%
+\subsection{Add a Quote}\label{add-a-quote}}
+
+``It's all a great mystery\ldots look up to the sky and you'll see how
+everything changes.''- Antoine de Saint-Exupery
+
+\hypertarget{add-an-equation}{%
+\subsection{Add an Equation}\label{add-an-equation}}
+
+\[ (1+\frac{1}{x}) \]
+
+\hypertarget{add-a-footnote}{%
+\subsection{Add a Footnote}\label{add-a-footnote}}
+
+blase blasa \footnote{This is a footnote}
+
+\hypertarget{add-citations}{%
+\subsection{Add Citations}\label{add-citations}}
+
+writing something{[}@RforEveryone{]} something
+wrote{[}@DiscoveringStatisticsUsingR{]}
+
+\hypertarget{inline-code}{%
+\section{Inline Code}\label{inline-code}}
+
+\hypertarget{ny-times-covid-19-data}{%
+\subsection{NY Times COVID-19 Data}\label{ny-times-covid-19-data}}
+
+\includegraphics{Assignment04_DSC520_Smith_Shauna_3rdpart_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\hypertarget{r4ds-height-vs-earnings}{%
+\subsection{R4DS Height vs Earnings}\label{r4ds-height-vs-earnings}}
+
+\includegraphics{Assignment04_DSC520_Smith_Shauna_3rdpart_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\hypertarget{tables}{%
+\section{Tables}\label{tables}}
+
+\begin{verbatim}
+##        name   race in_fellowship ring_bearer  age
+## 1    Aragon    Men          TRUE       FALSE   88
+## 2     Bilbo Hobbit         FALSE        TRUE  129
+## 3     Frodo Hobbit          TRUE        TRUE   51
+## 4 Galadriel    Elf         FALSE       FALSE 7000
+## 5       Sam Hobbit          TRUE        TRUE   36
+## 6   Gandalf   Maia          TRUE        TRUE 2019
+## 7   Legolas    Elf          TRUE       FALSE 2931
+## 8    Sauron   Maia         FALSE        TRUE 7052
+## 9    Gollum Hobbit         FALSE        TRUE  589
+\end{verbatim}
+
+\hypertarget{knitr-table-with-kable}{%
+\subsection{Knitr Table with Kable}\label{knitr-table-with-kable}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(characters\_df, }\AttributeTok{caption =}\StringTok{"One Ring to Rule Them All"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}llllr@{}}
+\caption{One Ring to Rule Them All}\tabularnewline
+\toprule
+name & race & in\_fellowship & ring\_bearer & age \\
+\midrule
+\endfirsthead
+\toprule
+name & race & in\_fellowship & ring\_bearer & age \\
+\midrule
+\endhead
+Aragon & Men & TRUE & FALSE & 88 \\
+Bilbo & Hobbit & FALSE & TRUE & 129 \\
+Frodo & Hobbit & TRUE & TRUE & 51 \\
+Galadriel & Elf & FALSE & FALSE & 7000 \\
+Sam & Hobbit & TRUE & TRUE & 36 \\
+Gandalf & Maia & TRUE & TRUE & 2019 \\
+Legolas & Elf & TRUE & FALSE & 2931 \\
+Sauron & Maia & FALSE & TRUE & 7052 \\
+Gollum & Hobbit & FALSE & TRUE & 589 \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{pandoc-table}{%
+\subsection{Pandoc Table}\label{pandoc-table}}
+
+\hypertarget{tables-1}{%
+\section{Tables}\label{tables-1}}
+
+\begin{longtable}[]{@{}ccccc@{}}
+\toprule
+Name & Race & In Fellowship? & Is Ring Bearer? & Age \\
+\midrule
+\endhead
+Aragon & Men & Yes & No & 88 \\
+Bilbo & Hobbit & No & Yes & 129 \\
+Frodo & Hobbit & Yes & Yes & 51 \\
+Sam & Hobbit & Yes & Yes & 36 \\
+Sauron & Maia & No & Yes & 7052 \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\end{document}
