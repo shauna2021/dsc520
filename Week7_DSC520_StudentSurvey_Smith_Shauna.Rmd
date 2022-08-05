@@ -3,6 +3,7 @@ title: "DSC520_Week7_Smith_Shauna_StudentSurvey"
 author: "Shauna Smith"
 date: "July 21, 2022"
 output:
+  pdf_document: default
   html_document: default
   word_document: default
 ---
@@ -27,15 +28,16 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ```{r}
+setwd("/Users/Shaun/Downloads")
+studentSurv <- read.csv("student-survey.csv")
 
-studentSurv <- read.csv(file.choose())
-
-studentSurv
+head(studentSurv)
 ```
 
 ##Use R to calculate the covariance of the Survey variables and provide an explanation of why you would use this calculation and what the results indicate.
 
 ```{r}
+dim(studentSurv)
 cov(studentSurv)
 pairs(studentSurv)
 ```
@@ -77,7 +79,10 @@ cor(studentSurv)^2
 cor(studentSurv)^2*100
 ```
 
-##Based on your analysis can you say that watching more TV caused students to read less? Explain I would say that the data shows the relevance of "TimeTv" accounted for 77.98% and "TimeReading" only accounted for 18.91%. This is suggesting the largest portion of devotion regarding time, was dedicated to "Timetv" leaving less than 19% attributable to "TimeReading". This evidence, along with a strong correlation from the matrix can lead us to claim a significant correlation, but not necessarily a determined causation outside of the fixed time measurement allotted overall/(awake for only an avg. of 16 hours/day).
+##Based on your analysis can you say that watching more TV caused students to read less? Explain
+
+ I would say that the data shows the relevance of "TimeTv" accounted for 77.98% and "TimeReading" only accounted for 18.91%. This is suggesting the largest portion of devotion regarding time, was dedicated to "Timetv" leaving less than 19% attributable to "TimeReading". This evidence, along with a strong correlation from the matrix can lead us to claim a significant correlation, but not necessarily a determined causation outside of the fixed time measurement allotted overall/(awake for only an avg. of 16 hours/day).
+
 
 ##Pick three variables and perform a partial correlation, documenting which variable you are "controlling". Explain how this changes your interpretation and explanation of the results
 
