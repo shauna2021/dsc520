@@ -1,0 +1,177 @@
+---
+title: "Exercise 10.2 DSC520"
+author: "Shauna Smith"
+date: "`r Sys.Date()`"
+output: html_document
+        pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In this problem, you will use the nearest neighbors algorithm to fit a model on two simplified datasets. The first dataset (found in binary-classifier-data.csv) contains three variables; label, x, and y. The label variable is either 0 or 1 and is the output we want to predict using the x and y variables (You worked with this dataset last week!). The second dataset (found in trinary-classifier-data.cs
+
+
+```{r}
+setwd("/Users/Shaun/Downloads")
+trinary<- read.csv("trinary-classifier-data.csv")
+head(trinary)
+summary(trinary)
+```
+
+
+
+```{r}
+setwd("/Users/Shaun/Downloads")
+binary<- read.csv("binary-classifier-data (1).csv")
+head(binary)
+summary(binary)
+
+```
+Note that in real-world datasets, your labels are usually not numbers, but text-based descriptions of the categories (e.g. spam or ham). In practice, you will encode categorical variables into numeric values.
+
+1. Plot the data from each data set using a scatter plot.
+
+2. The k nearest neighbors algorithm categorizes an input value by looking at the labels for the k nearest points and assigning a category based on the most common label. In this problem, you will determine which points are nearest by calculating the Euclidean distance between two points. As a refresher, the Euclidean distance between two points:
+p1 = (x1,y1) and p2 = (x2,y2): 
+d= "fx" as seen in blackboard.
+
+
+```{r}
+install.packages("ggplot2")
+library(ggplot2)
+
+ggplot(binary, aes(x=x,y=y))+geom_point()+labs(x="X", y="y", title = "Binary")
+
+ggplot(trinary, aes(x=x,y=y))+geom_point()+labs(x="X", y="Y", title= "Trinary")
+
+
+```
+
+Euclidean Distance:
+
+```{r}
+x = c(50,30)
+y = c(40,30)
+euclidean_Dist <- function(x,y) sqrt((sum(x-y)^2))
+euclidean_Dist(a,b)
+```
+
+Setting the k means clustering practice:
+
+```{r}
+
+
+ktrainbi<-binary[,which(names(binary)!="label")]
+
+ktraintri<-trinary[,which(names(trinary)!="label")]
+
+set.seed(456)
+binaryk3<-kmeans(x=ktrainbi, centers=3)
+
+
+install.packages("useful")
+library(useful)
+
+plot(binaryk3, data=ktrainbi)
+
+bibest<- FitKMeans(ktrainbi, max.clusters = 20, nstart=25, seed = 456)
+
+PlotHartigan(bibest)
+
+install.packages("cluster")
+library(cluster)
+biPam<- pam(x=binary, k=3)
+biPam
+plot(biPam)
+```
+
+Fitting KNN Models for: (k=3, k=5, k=10, k=15, k=20, k=25)
+
+```{r}
+summary(binary)
+str(binary)
+
+normalize <- function(x){+return((x - min(x)) / (max(x) - min(x)))}
+binaryscaled<-as.data.frame(lapply(binary[,c(2,3)], normalize))
+str(binaryscaled)
+summary(binaryscaled)
+
+binary_train<-binaryscaled[1:299,]
+binary_test<-binaryscaled[300:1498,]
+bin_train_target<-binary[1:299,1]
+bin_test_target<-binary[300:1498,1]
+ 
+require(class)
+
+modk3<-knn(train=binary_train, test=binary_test, cl=bin_train_target,k=3)
+modk5<-knn(train=binary_train, test=binary_test, cl=bin_train_target,k=5)
+modk10<-knn(train=binary_train, test=binary_test, cl=bin_train_target,k=10)
+modk15<-knn(train=binary_train, test=binary_test, cl=bin_train_target,k=15)
+modk20<-knn(train=binary_train, test=binary_test, cl=bin_train_target,k=20)
+modk25<-knn(train=binary_train, test=binary_test, cl=bin_train_target,k=25)
+
+table(bin_test_target,modk3)
+table(bin_test_target,modk5)
+table(bin_test_target,modk10)
+table(bin_test_target,modk15)
+table(bin_test_target,modk20)
+table(bin_test_target,modk25)
+
+```
+
+plotting the accuracy against models:
+
+```{r}
+
+#checking for accuracy by comparing linear to logistic
+install.packages("forecast")
+library(forecast)
+bilm<-lm(label~x+y, data=binary)
+plot(bilm)
+accuracy(bilm)
+bilg<-glm(label~x+y, data=binary)
+plot(bilg)
+accuracy(bilg)
+library(ggplot2)
+plot(binaryscaled,modk3)
+
+
+```
+
+```{r}
+setwd("/Users/Shaun/Downloads")
+clustered<-read.csv("clustering-data.csv")
+str(clustered)
+summary(clustered)
+head(clustered)
+
+plot(clustered)
+kmeans(clustered, centers=2, iter.max=100, nstart=100)
+
+install.packages("factoextra")
+library(factoextra)
+fviz_cluster(kmeans(clustered,center=2,iter.max = 100, nstart = 100), data=clustered)
+fviz_nbclust(clustered, kmeans, method="wss")
+fviz_nbclust(clustered, kmeans, method="silhouette")
+fviz_nbclust(clustered, kmeans, method="gap_stat")
+```
+
+Next, is to create a visual for a cluster plot.
+
+```{r}
+
+fviz_cluster(kmeans(clustered, centers=4, iter.max = 100, nstart = 100), data=clustered)
+
+kmeans(clustered, centers=4, iter.max=100, nstart=100)
+
+```
+
+Fitting plots for k=2 : k=12
+
+```{r}
+kmclus12<-kmeans(clustered, 12)
+plot(kmclus12)
+
+```
